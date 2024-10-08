@@ -57,7 +57,7 @@ userSchema.pre("save", async function (next) {
 
   if (!this.isModified("password")) return next(); // if password is not modified dont do antyhing
 
-  this.password = bcrypt.hash(this.password, 10); //  encrypt password using bcrypt library
+  this.password = await bcrypt.hash(this.password, 10); //  encrypt password using bcrypt library
   next();
 });
 
@@ -92,4 +92,4 @@ userSchema.methods.generateRefreshToken = function () {
   );
 };
 
-export const User = mongoose.model("User", userSchema());
+export const User = mongoose.model("User", userSchema);
